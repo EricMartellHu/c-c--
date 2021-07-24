@@ -1,0 +1,21 @@
+我们编出动态链接库，只需要用到的头文件和.so就可以使用其中的函数，实际上头文件也是为了让用户看一看，实际连头文件都不用。
+
+简单来看，动态链接库就是.c,.cpp文件的集合，然后在调用的时候就需要一个接口头文件和头文件下的函数声明而已。这样我们就可以将动态链接库重复使用，不需要每次都定义重复的函数。
+
+
+此例是：
+动态库编译
+test_a.c  和   test_b.c  和   test_c.c  三个文件编译成so文件
+命令为：   gcc test_a.c test_b.c test_c.c -fPIC -shared -o libtest.so
+
+动态库链接：
+test.c  与 libtest.so链接生成可执行文件test
+命令： gcc test.c -L. -ltest -o test
+
+测试命令：ldd test
+如果列出libtest.so应该就是连接正常了
+不过这里有一个问题：在ldd test后
+libtest.so => not found
+解决方法是将libtest.so复制到/usr/lib文件夹下
+
+最后./test 执行文件

@@ -1,0 +1,10 @@
+static_cast一般用来将枚举类型转换成整型，或者整型转换成浮点型。也可以用来将指向父类的指针转换成指向子类的指针。做这些转换前，你必须确定要转换的数据确实是目标类型的数据，因为static_cast不做运行时的类型检查以保证转换的安全性。也因此，static_cast不如dynamic_cast安全。
+对含有二义性的指针，dynamic_cast会转换失败，而static_cast却直接且粗暴地进行转换。这是非常危险的。
+
+
+c++除了能使用c语言的强制类型转换外，还新增了四种强制类型转换：static_cast、dynamic_cast、const_cast、reinterpret_cast，主要运用于继承关系类间的强制转化，语法为：
+
+static_cast<new_type>      (expression)
+dynamic_cast<new_type>     (expression) 
+const_cast<new_type>       (expression) 
+reinterpret_cast<new_type> (expression)
